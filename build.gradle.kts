@@ -1,6 +1,5 @@
 plugins {
     id("com.android.library") version "9.4.0"
-    id("org.jetbrains.kotlin.android") version "2.2.10"
     id("maven-publish")
 }
 
@@ -15,6 +14,10 @@ android {
     publishing {
         singleVariant("release")
     }
+}
+
+dependencies {
+    testImplementation("junit:junit:4.13.2")
 }
 
 afterEvaluate {
