@@ -25,7 +25,7 @@ afterEvaluate {
 
                 groupId = "com.github.Dhruuvil"
                 artifactId = "MyLibrary"
-                version = "1.0.0"
+                version = "1.0.1"
             }
         }
     }
