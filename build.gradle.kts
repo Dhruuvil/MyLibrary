@@ -1,30 +1,32 @@
 plugins {
-    alias(libs.plugins.android.library)
+    id("com.android.library") version "9.4.0"
+    id("org.jetbrains.kotlin.android") version "2.2.10"
+    id("maven-publish")
 }
 
 android {
     namespace = "com.example.mylibrary"
-    compileSdk {
-        version = release(37)
-    }
+    compileSdk = 37
 
     defaultConfig {
-        minSdk = 30
-
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-    }
-    compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_11
-        targetCompatibility = JavaVersion.VERSION_11
+        minSdk = 23
     }
 
+    publishing {
+        singleVariant("release")
+    }
 }
 
-dependencies {
-    implementation(libs.androidx.appcompat)
-    implementation(libs.androidx.core.ktx)
-    implementation(libs.material)
-    testImplementation(libs.junit)
-    androidTestImplementation(libs.androidx.espresso.core)
-    androidTestImplementation(libs.androidx.junit)
+afterEvaluate {
+    publishing {
+        publications {
+            create<MavenPublication>("release") {
+                from(components["release"])
+
+                groupId = "com.github.Dhruuvil"
+                artifactId = "MyLibrary"
+                version = "1.0.0"
+            }
+        }
+    }
 }
